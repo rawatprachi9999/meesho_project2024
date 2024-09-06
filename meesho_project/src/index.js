@@ -1,10 +1,12 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client'; // Import createRoot
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import App from './App';
+import { store } from './redux/store'; // adjust the import path according to your project structure
 
-const container = document.getElementById('root');
-const root = createRoot(container); // Use createRoot instead of ReactDOM.render
-
-root.render(
+ReactDOM.render(
+  <Provider store={store}>
     <App />
+  </Provider>,
+  document.getElementById('root')
 );

@@ -1,15 +1,25 @@
-import './Profile.css';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Profile({ user, handleDeleteAccount }) {
+  const navigate = useNavigate();
+
+  const handleAccountDeletion = () => {
+    const confirmDelete = window.confirm('Are you sure you want to delete your account? This action cannot be undone.');
+    if (confirmDelete) {
+      localStorage.removeItem('user');
+      handleDeleteAccount(); // Update the state in the parent component
+      navigate('/signin');
+    }
+  };
+
   return (
     <div className="profile-dropdown">
       {user ? (
         <>
           <p className="profile-item">Hello, {user.name}</p>
-          <p className="profile-item">Phone: {user.phoneNumber}</p>
           <Link to="/my-orders" className="profile-item">My Orders</Link>
-          <button onClick={handleDeleteAccount} className="profile-item">Delete Account</button>
+          <button onClick={handleAccountDeletion} className="profile-item">Delete Account</button>
         </>
       ) : (
         <>

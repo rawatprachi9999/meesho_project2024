@@ -1,0 +1,16 @@
+.store-banner {
+    display: flex;
+    justify-content: space-between; 
+    padding: 20px;
+    margin: 20px auto;
+    background-color: #8c1c9f;
+    color: white;
+    border-radius: 10px;
+    background-image: url('../assets/images/banner.png');
+    background-size: cover;
+    background-position: center;
+    width: 90%;
+    max-width: 1200px; 
+    height: 100%; 
+    max-height: 1200px; 
+}

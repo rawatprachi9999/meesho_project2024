@@ -1,5 +1,5 @@
 import React from 'react';
-import './TopCategoriesSection.css'
+import '../styles/TopCategoriesSection.css'
 import sale from '../assets/images/sale.jpg'
 const TopCategoriesSection = () => {
   return (<>
@@ -13,6 +13,7 @@ const TopCategoriesSection = () => {
     </div>
     <div className="sale-image">
       <img src={sale} alt="Sale Banner" />
+      
     </div>
     <br/>
     </>

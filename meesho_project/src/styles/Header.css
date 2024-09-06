@@ -1,0 +1,335 @@
+/* Variables */
+:root {
+  --primary-color: #9e28b4;
+  --primary-hover-color: #7e2091;
+  --border-color: #ccc;
+  --text-color: #333;
+  --light-text-color: #666;
+  --background-color: #ffffff;
+  --header-padding: 10px 10px; /* Reduced padding */
+  --dropdown-padding: 8px;
+  --icon-size: 28px;
+  --header-max-width: 100%; /* Adjusted to 70% to reduce width */
+}
+
+.dropdown, .profile-dropdown, .download-dropdown {
+  z-index: 1001; 
+}
+
+.header {
+  background-color: var(--background-color);
+  padding: var(--header-padding);
+  border-bottom: none; 
+  position: fixed; 
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--header-max-width);
+  z-index: 1000; 
+  box-sizing: border-box; 
+}
+
+.header::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px; /* Adjust thickness here */
+  background-color: #bdaaaa; /* Black color */
+}
+
+body {
+  margin-top: 64px; /* Adjusted for the additional line */
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px; /* Reduced gap between items */
+}
+
+.brand-image {
+  width: 100px; /* Reduced width */
+  height: auto;
+  display: block;
+  margin-left: 5px;
+  padding: 0;
+}
+
+/* Search Bar */
+.search-bar {
+  position: relative;
+  width: 100%; /* Reduced width */
+  margin-right: 10px; /* Reduced margin */
+  max-width: 500px; /* Reduced max-width */
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 8px 12px 8px 40px;
+  font-size: 16px; /* Reduced font size */
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.search-bar::before {
+  content: "\1F50D"; /* Search icon */
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px; /* Reduced font size */
+  color: var(--border-color);
+}
+
+.search-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1001; /* Ensure dropdown is above the header */
+  padding: var(--dropdown-padding);
+  display: none;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.search-options:focus-within {
+  display: flex;
+}
+
+.search-bar input:focus + .search-options {
+  display: flex;
+}
+
+.search-option {
+  width: 50%;
+}
+
+.search-option strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
+
+.search-option ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search-option li {
+  padding: 4px 0;
+  color: var(--light-text-color);
+}
+
+.search-option li:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Account Links */
+.account-links {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Reduced gap between nav items */
+}
+
+.account-links a,
+.download-app a,
+.profile-dropdown p,
+.cart a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 16px; /* Consistent font size */
+  font-weight: 500; /* Consistent font weight */
+  display: flex;
+  align-items: center;
+  padding: 0 8px; /* Add horizontal padding for spacing */
+  margin: 0 5px; /* Add horizontal margin for spacing */
+}
+
+.account-links a:hover,
+.download-app a:hover,
+.profile-dropdown p:hover,
+.cart a:hover {
+  text-decoration: underline; /* Add underline on hover for links */
+  color: var(--primary-color); /* Primary color on hover */
+}
+
+.download-app {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px; /* Reduced gap */
+}
+
+.download-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1001;
+  background-color: white; /* White background for the box */
+  color: #fff; /* White text color */
+  border-radius: 4px; /* Rounded corners */
+  padding: 5px; /* Reduced padding */
+  display: none;
+  width: 150px; /* Reduced width */
+  box-shadow: 0 4px 8px rgba(200, 192, 192, 0.2); /* Shadow for the dropdown */
+  transition: all 0.3s ease;
+}
+
+.download-dropdown a {
+  color: #fff; /* White text for links */
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  padding: 5px; /* Reduced padding */
+  font-size: 0.9em; /* Slightly reduced text size */
+}
+
+.download-dropdown p {
+  margin: 5px;
+  padding: 5px; /* Reduced padding */
+  text-align: center;
+}
+
+.download-dropdown a:hover {
+  color: white; /* Slight color change on hover */
+}
+
+.download-app:hover .download-dropdown {
+  display: block;
+}
+
+.download-dropdown img {
+  max-width: 130px;
+  cursor: pointer;
+  margin: 0 2px;
+  display: block;
+}
+
+.download-app img.icon {
+  max-width: 40px; /* Adjust size of the app icon if needed */
+}
+
+/* Profile Dropdown */
+.profile {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-right: 0px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.profile .icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  margin-right: 8px;
+  margin-left: 5px;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  padding: var(--dropdown-padding);
+  width: 220px; /* Reduced width */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1001; /* Ensure dropdown is above the header */
+  display: none;
+  transition: all 0.3s ease;
+}
+
+.profile:hover .profile-dropdown {
+  display: block;
+}
+
+.profile-dropdown p {
+  margin: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.profile-dropdown p:hover {
+  background-color: #f9f9f9;
+}
+
+.cart {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px; /* Reduced margin */
+  cursor: pointer;
+  color: inherit; /* Ensure text color is inherited from parent */
+}
+
+.cart .icon {
+  width: var(--icon-size); /* Consistent icon size */
+  height: var(--icon-size);
+  color: inherit; /* Ensure icon color is inherited from parent */
+}
+
+/* Remove color styles from cart text */
+.cart a, .cart p {
+  color: inherit; /* Ensure links and paragraphs within cart do not have color applied */
+  text-decoration: none; /* Remove any text decoration */
+}
+
+/* Buttons */
+button {
+  width: 100%;
+  padding: 10px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--primary-hover-color);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .header-top {
+    flex-direction: column;
+    gap: 10px; /* Adjusted gap */
+  }
+
+  .brand-image {
+    margin-bottom: 10px;
+  }
+
+  .search-bar {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .account-links {
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  .account-links a {
+    margin-left: 5px; /* Further reduced margin */
+  }
+}
+
+.download-app img {
+  max-width: 150px; /* Ensure images are not larger than this width */
+  width: 100%; /* Ensure images fill their container */
+  cursor: pointer;
+}

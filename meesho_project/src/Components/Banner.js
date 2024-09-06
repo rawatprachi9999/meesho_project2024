@@ -1,5 +1,5 @@
 import React from 'react';
-import './Banner.css';
+import '../styles/Banner.css';
 import free_delivery from '../assets/images/free_delivery.png'
 import cash_on_delivery from '../assets/images/cash_on_delivery.png'
 import easy_returns from '../assets/images/easy_returns.png'

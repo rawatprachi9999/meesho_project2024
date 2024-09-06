@@ -1,20 +1,14 @@
-import './App.css';
+// App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
-import SignIn from './pages/SignIn';
-import SignUpFrom from './pages/SignUpFrom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import AppRoutes from './AppRoutes';
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUpFrom />} />
-      </Routes>
+      <AppRoutes />
     </Router>
-  )
+  );
 }
 
 export default App;

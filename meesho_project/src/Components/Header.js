@@ -1,12 +1,13 @@
 import React, { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import './Header.css';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux'; // If you want to show cart count
+import '../styles/Header.css';
 import phoneIcon from '../assets/images/phone.png';
 import profileIcon from '../assets/images/profile.jpg';
 import cartIcon from '../assets/images/cart.png';
 import brand from '../assets/images/brand.jpg';
 import Profile from './Profile';
-
+import LandingPage from '../pages/LandingPage';
 
 const Header = () => {
   const [user, setUser] = useState(null);
@@ -15,8 +16,11 @@ const Header = () => {
   const [recentSearches, setRecentSearches] = useState([]);
   const [searchFocused, setSearchFocused] = useState(false);
   const [downloadDropdown, setDownloadDropdown] = useState(false);
-
   const searchBarRef = useRef(null);
+  const navigate = useNavigate();
+  
+  // To get cart count
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
   const handleAccountHover = () => {
     setAccountDropdown(true);
@@ -64,11 +68,18 @@ const Header = () => {
     setUser(null);
   };
 
+  // Navigate to Cart Page
+  const handleCartClick = () => {
+    navigate('/cart');
+  };
+
   return (
     <header className="header">
       <div className="header-top">
         <div className="brand">
-          <img src={brand} alt="brand logo" className="brand-image" />
+          <Link to="/">
+            <img src={brand} alt="brand logo" className="brand-image" />
+          </Link>
         </div>
 
         <div className="search-bar" ref={searchBarRef}>
@@ -114,7 +125,8 @@ const Header = () => {
         </div>
 
         <div className="account-links">
-          <div className="download-app"
+          <div
+            className="download-app"
             onMouseEnter={handleDownloadHover}
             onMouseLeave={handleDownloadLeave}
           >
@@ -122,23 +134,26 @@ const Header = () => {
             Download App
             {downloadDropdown && (
               <div className="download-dropdown">
-                <p><a href="https://play.google.com/store/apps/details?id=com.meesho.supply" target='_blank'>
-                <img src='https://images.meesho.com/images/pow/playstore-icon-big.png' />
-                </a></p>
                 <p>
-                  <a href="https://apps.apple.com/in/app/meesho/id1457958492" target='_blank'>
-                  <img src='https://images.meesho.com/images/pow/appstore-icon-big.png' />
-                  </a></p>    
+                  <a href="https://play.google.com/store/apps/details?id=com.meesho.supply" target='_blank' rel="noopener noreferrer">
+                    <img src='https://images.meesho.com/images/pow/playstore-icon-big.png' alt="Google Play Store" />
+                  </a>
+                </p>
+                <p>
+                  <a href="https://apps.apple.com/in/app/meesho/id1457958492" target='_blank' rel="noopener noreferrer">
+                    <img src='https://images.meesho.com/images/pow/appstore-icon-big.png' alt="Apple App Store" />
+                  </a>
+                </p>    
               </div>
             )}
           </div>
 
           <div className="become-supplier">
-            <Link to="https://supplier.meesho.com/?utm_source=meesho&utm_medium=website&utm_campaign=header" className="become-supplier" target='_blank'>Become a Supplier</Link>
+            <Link to="https://supplier.meesho.com/?utm_source=meesho&utm_medium=website&utm_campaign=header" className="become-supplier" target='_blank' rel="noopener noreferrer">Become a Supplier</Link>
           </div>
 
           <div className="newsroom">
-            <Link to="https://www.meesho.io/news" className="newsroom" target='_blank'>Newsroom</Link>
+            <Link to="https://www.meesho.io/news" className="newsroom" target='_blank' rel="noopener noreferrer">Newsroom</Link>
           </div>
 
           <div
@@ -146,17 +161,19 @@ const Header = () => {
             onMouseEnter={handleAccountHover}
             onMouseLeave={handleAccountLeave}
           >
-            <img src={profileIcon} alt="Profile" className="icon" />Profile
+            <img src={profileIcon} alt="Profile" className="icon" />
+            Profile
             {accountDropdown && (
               <Profile user={user} handleDeleteAccount={handleDeleteAccount} />
             )}
           </div>
-
         </div>
 
         <div className="cart">
-          <img src={cartIcon} alt="Cart" className="icon" />
-          Cart
+          <Link to="/cart">
+            <img src={cartIcon} alt="Cart" className="icon" />
+            Cart ({cartItems.length}) {/* Display the number of items in the cart */}
+          </Link>
         </div>
       </div>
     </header>

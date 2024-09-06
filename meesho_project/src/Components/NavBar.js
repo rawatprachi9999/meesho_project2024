@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './NavBar.css';
+import '../styles/NavBar.css';
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(null);
@@ -193,51 +193,6 @@ const Navbar = () => {
                 <p>Belts</p>
                 <p>Watches</p>
                 <p>Hair Accessories</p>
-              </div>
-            </div>
-          )}
-        </li>
-
-        <li
-          onClick={() => handleClick('BagsFootwear')}
-          ref={dropdownRef}
-        >
-          Bags & Footwear
-          {activeMenu === 'BagsFootwear' && (
-            <div className="dropdown">
-              <div className="dropdown-section">
-                <h5>Women Bags</h5>
-                <p>Handbags</p>
-                <p>Slingbags</p>
-                <p>Totes</p>
-              </div>
-              <div className="dropdown-section">
-                <h5>Men Footwear</h5>
-                <p>Sports Shoes</p>
-                <p>Casual Shoes</p>
-                <p>Formal Shoes</p>
-              </div>
-            </div>
-          )}
-        </li>
-
-        <li
-          onClick={() => handleClick('Electronics')}
-          ref={dropdownRef}
-        >
-          Electronics
-          {activeMenu === 'Electronics' && (
-            <div className="dropdown">
-              <div className="dropdown-section">
-                <h5>Mobile & Accessories</h5>
-                <p>All Mobile & Accessories</p>
-                <p>Smartwatches</p>
-                <p>Mobile Holders</p>
-              </div>
-              <div className="dropdown-section">
-                <h5>Appliances</h5>
-                <p>Grooming</p>
-                <p>Home Appliances</p>
               </div>
             </div>
           )}

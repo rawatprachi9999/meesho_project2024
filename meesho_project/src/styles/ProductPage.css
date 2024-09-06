@@ -1,0 +1,24 @@
+
+.product-page {
+  display: flex;
+}
+
+.filter-sidebar {
+  width: 25%;
+  padding: 10px;
+  border-right: 1px solid #ccc;
+}
+
+.product-grid {
+  width: 75%;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+
+.product-grid a {
+  text-decoration: none;
+  color: black;
+}

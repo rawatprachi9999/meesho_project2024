@@ -1,0 +1,62 @@
+.cart-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cart-title {
+    text-align: left; /* Align "Your Cart" text to the left */
+    margin-bottom: 20px;
+  }
+  
+  .cart-content {
+    display: flex;
+    justify-content: space-between; /* Cart items on the left, summary on the right */
+    gap: 20px; /* Space between items and summary */
+  }
+  
+  .cart-items {
+    width: 60%; /* Take up a portion of the space */
+  }
+  
+  .cart-item {
+    display: flex;
+    flex-direction: column; /* Stack details and button vertically */
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 20px; /* Space between each cart item */
+    border: 1px solid #ddd;
+  }
+  
+  .cart-item-image {
+    width: 150px; /* Adjust image width */
+    height: 100px; /* Adjust image height */
+    object-fit: cover;
+    margin-bottom: 10px; /* Space between image and details */
+  }
+  
+  .cart-item-details {
+    margin-bottom: 10px; /* Space between details and button */
+  }
+  
+  .button-half-width {
+    width: 100px;
+    padding: 8px;
+   
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .cart-summary {
+    width: 35%; /* Take up a portion of the space */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    height: fit-content; /* Align summary to top */
+  }
+  
+  .cart-summary h2 {
+    margin-top: 0;
+  }
+  

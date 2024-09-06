@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import ReactSlider from 'react-slider';
-import './FilterSidebar.css';
+import '../styles/FilterSidebar.css';
 
 function FilterSidebar({ filters, setFilters }) {
-  const [searchTerm, setSearchTerm] = useState(filters.search);
+  const [searchTerm, setSearchTerm] = useState(filters.search || '');
   const [priceRange, setPriceRange] = useState(filters.priceRange || [0, 1000]);
   const [ratingRange, setRatingRange] = useState(filters.ratingRange || [0, 5]);
   const categories = [
@@ -81,7 +81,7 @@ function FilterSidebar({ filters, setFilters }) {
           max={1000}
           step={10}
           onChange={handlePriceChange}
-          renderThumb={(props, state) => <div {...props}></div>}
+          renderThumb={(props) => <div {...props} />} // Ensure `key` is not included in props
         />
         <div className="price-labels">
           <span>${priceRange[0]}</span>
@@ -93,7 +93,6 @@ function FilterSidebar({ filters, setFilters }) {
         <h4>Rating Range</h4>
         <ReactSlider
           className="horizontal-slider"
-
           thumbClassName="thumb"
           trackClassName="track"
           value={ratingRange}
@@ -101,7 +100,7 @@ function FilterSidebar({ filters, setFilters }) {
           max={5}
           step={0.5}
           onChange={handleRatingChange}
-          renderThumb={(props, state) => <div {...props}></div>}
+          renderThumb={(props) => <div {...props} />} // Ensure `key` is not included in props
         />
         <div className="rating-labels">
           <span>{ratingRange[0]}★</span>
