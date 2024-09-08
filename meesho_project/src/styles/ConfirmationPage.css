@@ -1,0 +1,21 @@
+.confirmation-container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #f4f4f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .confirmation-container h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #28a745;
+  }
+  
+  .confirmation-container p {
+    font-size: 18px;
+    color: #555;
+  }
+  

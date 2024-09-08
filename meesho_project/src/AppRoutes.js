@@ -8,6 +8,8 @@ import ProductPage from './Components/ProductPage';
 import ProductDetails from './Components/ProductDetails';
 import Cart from './Components/Cart';
 import products from './Components/products';
+import BuyNowPage from './Components/BuyNowPage';
+import Confirmation from './Components/Confirmation';
 
 function AppRoutes({ user, setUser, handleDeleteAccount }) {
   return (
@@ -19,6 +21,8 @@ function AppRoutes({ user, setUser, handleDeleteAccount }) {
       <Route path="/signin" element={<SignIn onSignInComplete={setUser} />} />
       <Route path="/signup" element={<SignUpForm setUser={setUser} />} />
       <Route path="/cart" element={<Cart />} />
+      <Route path="/buynow" element={<BuyNowPage />} />
+      <Route path="/confirmation" element={<Confirmation />} />
       {/* Catch-all route for undefined paths */}
       <Route path="*" element={<LandingPage />} />
     </Routes>

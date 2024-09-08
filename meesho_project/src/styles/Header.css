@@ -128,7 +128,7 @@ body {
 }
 
 .search-option li:hover {
-  text-decoration: underline;
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -157,7 +157,7 @@ body {
 .download-app a:hover,
 .profile-dropdown p:hover,
 .cart a:hover {
-  text-decoration: underline; /* Add underline on hover for links */
+  text-decoration: none; /* Add underline on hover for links */
   color: var(--primary-color); /* Primary color on hover */
 }
 
@@ -166,7 +166,7 @@ body {
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 6px; /* Reduced gap */
+  gap: 4px; /* Reduced gap */
 }
 
 .download-dropdown {
@@ -179,7 +179,8 @@ body {
   border-radius: 4px; /* Rounded corners */
   padding: 5px; /* Reduced padding */
   display: none;
-  width: 150px; /* Reduced width */
+  width: 200px; /* Reduced width */
+  height: 200px; /* Reduced width */
   box-shadow: 0 4px 8px rgba(200, 192, 192, 0.2); /* Shadow for the dropdown */
   transition: all 0.3s ease;
 }
@@ -226,15 +227,15 @@ body {
   display: flex;
   align-items: center;
   position: relative;
-  margin-right: 0px;
-  margin-left: 10px;
+  margin-right: 10px;
+  margin-left: 0px;
   cursor: pointer;
 }
 
 .profile .icon {
-  width: var(--icon-size);
-  height: var(--icon-size);
-  margin-right: 8px;
+  width: 35px;
+  height:30px;
+  margin-right: 2px;
   margin-left: 5px;
 }
 
@@ -244,12 +245,12 @@ body {
   right: 0;
   background-color: var(--background-color);
   border: 1px solid var(--border-color);
-  padding: var(--dropdown-padding);
-  width: 220px; /* Reduced width */
+  padding: 6px 6px;
+  width: 150px; /* Reduced width */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1001; /* Ensure dropdown is above the header */
   display: none;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
 
 .profile:hover .profile-dropdown {
@@ -258,7 +259,7 @@ body {
 
 .profile-dropdown p {
   margin: 10px;
-  padding: 8px 12px;
+  padding: 8px 8px;
   cursor: pointer;
 }
 
@@ -267,24 +268,25 @@ body {
 }
 
 .cart {
-  display: flex;
-  align-items: center;
-  margin-left: 10px;
-  margin-right: 10px; /* Reduced margin */
-  cursor: pointer;
-  color: inherit; /* Ensure text color is inherited from parent */
+  position: relative;
+  display: inline-block;
 }
 
 .cart .icon {
-  width: var(--icon-size); /* Consistent icon size */
+  width: var(--icon-size);
   height: var(--icon-size);
-  color: inherit; /* Ensure icon color is inherited from parent */
 }
 
-/* Remove color styles from cart text */
-.cart a, .cart p {
-  color: inherit; /* Ensure links and paragraphs within cart do not have color applied */
-  text-decoration: none; /* Remove any text decoration */
+.cart-count {
+  position: absolute;
+  top: -5px; /* Adjust to position the badge properly */
+  right: -5px; /* Adjust to position the badge properly */
+  background-color: red; /* Badge color */
+  color: white;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 /* Buttons */
@@ -332,4 +334,7 @@ button:hover {
   max-width: 150px; /* Ensure images are not larger than this width */
   width: 100%; /* Ensure images fill their container */
   cursor: pointer;
+}
+.become-supplier{
+  margin-left: 27px;
 }

@@ -168,13 +168,14 @@ const Header = () => {
             )}
           </div>
         </div>
-
         <div className="cart">
-          <Link to="/cart">
-            <img src={cartIcon} alt="Cart" className="icon" />
-            Cart ({cartItems.length}) {/* Display the number of items in the cart */}
-          </Link>
-        </div>
+        <Link to="/cart">
+          <img src={cartIcon} alt="Cart" className="icon" />
+          {cartItems.length > 0 && (
+            <span className="cart-count">{cartItems.length}</span>
+          )}
+        </Link>
+      </div>
       </div>
     </header>
   );

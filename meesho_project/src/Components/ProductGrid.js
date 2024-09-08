@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-
 function ProductGrid({ products, addToCart }) {
   return (
     <div className="product-grid">
@@ -19,9 +18,16 @@ function ProductGrid({ products, addToCart }) {
               <p>{product.rating} ★ ({product.reviews} reviews)</p>
             </div>
           </Link>
-          <button className="add-to-cart-btn" onClick={() => addToCart(product)}>
+          {/* Add to Cart button functionality */}
+          <button 
+            className="add-to-cart-btn" 
+            onClick={(e) => {
+              e.preventDefault(); // Prevents the Link navigation when clicking the button
+              addToCart(product); // Calls the addToCart function
+            }}
+          >
             Add to Cart
-          </button> {/* AddToCart functionality */}
+          </button>
         </div>
       ))}
     </div>

@@ -65,7 +65,7 @@ function ProductPage() {
       />
       <ProductGrid
         products={filteredProducts}
-        onAddToCart={handleAddToCart} // Pass the handler to ProductGrid
+        addToCart={handleAddToCart} // Pass the handler to ProductGrid
       />
     </div>
   );
