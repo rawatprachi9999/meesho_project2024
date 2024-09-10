@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function ProductGrid({ products, addToCart }) {
   return (
     <div className="product-grid">
-      {products.map(product => (
+      {products.map((product) => (
         <div key={product.id} className="product-card-container">
           <Link to={`/product/${product.id}`} className="product-link">
             <div className="product-card">
@@ -18,12 +18,13 @@ function ProductGrid({ products, addToCart }) {
               <p>{product.rating} ★ ({product.reviews} reviews)</p>
             </div>
           </Link>
+
           {/* Add to Cart button functionality */}
-          <button 
-            className="add-to-cart-btn" 
+          <button
+            className="add-to-cart-btn"
             onClick={(e) => {
-              e.preventDefault(); // Prevents the Link navigation when clicking the button
-              addToCart(product); // Calls the addToCart function
+              e.preventDefault(); // Prevents navigation when clicking the button
+              addToCart(product); // Calls the addToCart function passed as a prop
             }}
           >
             Add to Cart

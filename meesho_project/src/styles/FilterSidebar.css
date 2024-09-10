@@ -1,50 +1,55 @@
 .filter-sidebar {
-  padding-top: 20px;
-  width: 250px;
-  padding: 20px;
+  padding-top: 15px;
+  width: 230px; /* Reduced width */
+  padding: 15px; /* Reduced padding */
   border: 1px solid #ddd;
   background-color: #f9f9f9;
   position: -webkit-sticky; 
   position: sticky;
   top: 0; 
-  max-height: 110vh;
-  overflow-y: none;
- 
+  max-height: 100vh;
+  overflow-y: auto; /* Enable scrolling if needed */
 }
 
 .filter-sidebar h3 {
-  padding-top: 20px;
-  margin-bottom: 20px;
+  padding-bottom: 0px;
+  margin-bottom: -10px; /* Reduced margin */
   font-size: 18px;
 }
+
+.filter-category h4 {
+  margin-bottom: 8px; /* You can reduce this further if needed */
+  font-size: 16px;
+}
+
 
 .filter-category h4,
 .filter-search h4,
 .filter-price h4,
 .filter-rating h4 {
-  margin-bottom: 10px;
+  margin-bottom: 8px; /* Reduced margin */
   font-size: 16px;
 }
 
 .filter-category label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 6px; /* Reduced margin */
 }
 
 .filter-category input {
-  margin-right: 8px;
+  margin-right: 6px; /* Reduced space */
 }
 
 .filter-search input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
+  width: 90%; /* Reduced width */
+  padding: 6px; /* Reduced padding */
+  margin-bottom: 8px; /* Reduced margin */
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
 .filter-search button {
-  padding: 8px 12px;
+  padding: 6px 10px; /* Reduced button size */
   background-color: #9e28b4;
   color: #fff;
   border: none;
@@ -56,23 +61,22 @@
   background-color: #800080;
 }
 
-
 .filter-price,
 .filter-rating {
-  margin-top: 20px;
+  margin-top: 15px; /* Reduced top margin */
 }
 
 .horizontal-slider {
   width: 100%;
-  height: 8px;
+  height: 6px; /* Reduced height */
   background: #ddd;
   border-radius: 4px;
-  margin: 10px 0;
+  margin: 8px 0; /* Reduced margin */
 }
 
 .thumb {
-  width: 20px;
-  height: 20px;
+  width: 18px; /* Reduced thumb size */
+  height: 18px;
   background: #9e28b4;
   border-radius: 50%;
   cursor: pointer;

@@ -1,14 +1,25 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../styles/Cart.css'; // Add appropriate styles
-import Header from './Header'
-import safty from '../assets/images/safty.webp'
+import Header from './Header';
+import safty from '../assets/images/safty.webp';
+import { addToCart, reduceQuantity } from '../redux/cartSlice'; // Using your updated actions
 
 const Cart = () => {
+  const dispatch = useDispatch();
+
   const cartItems = useSelector((state) => state.cart.cartItems);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+
+  const handleAddItem = (item) => {
+    dispatch(addToCart(item)); // Dispatch action to increase the quantity
+  };
+
+  const handleReduceItem = (id) => {
+    dispatch(reduceQuantity(id)); // Dispatch action to reduce the quantity
+  };
 
   return (
     <div className="cart-page">
@@ -34,7 +45,23 @@ const Cart = () => {
                       ₹{item.price} <span className="discount-text">₹{item.discountPrice}</span>
                     </p>
                     <p>Size: {item.size} • Qty: {item.quantity}</p>
-                    <button className="remove-btn">REMOVE</button>
+
+                    {/* Add and Remove Buttons */}
+                    <div className="quantity-controls">
+                      <button 
+                        className="reduce-btn" 
+                        onClick={() => handleReduceItem(item.id)}
+                      >
+                        &#8722; {/* Unicode for minus symbol */}
+                      </button>
+                      <span className="quantity">{item.quantity}</span>
+                      <button 
+                        className="add-btn" 
+                        onClick={() => handleAddItem(item)}
+                      >
+                        &#43; {/* Unicode for plus symbol */}
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <p>Sold by: {item.seller}</p>
@@ -54,7 +81,7 @@ const Cart = () => {
           </div>
           <div className="continue-section">
             <p className="discount-info">Yay! Your total discount is ₹71</p>
-            {/* Updated Link to go to the Buy Now Page */}
+           
             <Link to="/buynow">
               <button className="continue-btn">Buy Now</button>
             </Link>

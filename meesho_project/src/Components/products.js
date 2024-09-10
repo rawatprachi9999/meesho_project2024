@@ -1,14 +1,23 @@
 
 import saree1 from '../assets/images/saree1.webp'
+import saree1Thumbnail from '../assets/images/saree1Thumbnail.webp'
 import saree2 from '../assets/images/saree2.webp'
+import saree2Thumbnail from '../assets/images/saree2Thumbnail.webp'
 import saree3 from '../assets/images/saree3.webp'
 import saree4 from '../assets/images/saree4.webp'
+import saree4Thumbnail from '../assets/images/saree4Thumbnail.webp'
+
 import saree5 from '../assets/images/saree5.webp'
+import saree5Thumbnail from '../assets/images/saree5Thumbnail.webp'
 import saree6 from '../assets/images/saree6.webp'
 
 
 import kurti1 from'../assets/images/kurti1.webp'
+import kurti1Thumbnail from'../assets/images/kurti1Thumbnail.webp'
+
 import kurti2 from'../assets/images/kurti2.webp'
+import kurti2Thumbnail from'../assets/images/kurti2Thumbnail.webp'
+
 import kurti3 from'../assets/images/kurti3.webp'
 import kurti4 from'../assets/images/kurti4.webp'
 
@@ -92,7 +101,9 @@ import photoframe from '../assets/images/photoframe.webp'
         reviews: 250, 
         image: saree1,
         details: 'A beautiful designer silk saree with intricate patterns, perfect for special occasions. Crafted from high-quality silk, this saree drapes elegantly and adds a touch of luxury to your wardrobe.',
-        sizesAvailable: ['Free Size'] 
+        sizesAvailable: ['Free Size'] ,
+        thumbnails : [saree1,saree1Thumbnail],
+        subcategory:'silk sarees',
       },
       { 
         id: 2, 
@@ -103,7 +114,10 @@ import photoframe from '../assets/images/photoframe.webp'
         reviews: 180, 
         image: kurti1,
         details: 'Comfortable cotton printed kurti with vibrant colors and a traditional design. Ideal for daily wear, this kurti pairs well with leggings or jeans for a casual yet stylish look.',
-        sizesAvailable: ['S', 'M', 'L'] 
+        thumbnails : [kurti1,kurti1Thumbnail],
+        sizesAvailable: ['S', 'M', 'L'] ,
+        subcategory:'kurtis',
+
       },
       { 
         id: 3, 
@@ -114,7 +128,10 @@ import photoframe from '../assets/images/photoframe.webp'
         reviews: 310, 
         image: saree2,
         details: 'Lightweight chiffon saree that offers a breezy, flowing silhouette. Perfect for summer events, this saree combines comfort with elegance and is easy to drape and manage.',
-        sizesAvailable: ['Free Size'] 
+        thumbnails : [saree2,saree2Thumbnail],
+        sizesAvailable: ['Free Size'] ,
+        subcategory:'sarees',
+       
       },
       { 
         id: 4, 
@@ -125,7 +142,9 @@ import photoframe from '../assets/images/photoframe.webp'
         reviews: 200, 
         image: kurti2,
         details: 'Elegant embroidered kurti featuring detailed thread work on soft fabric. This kurti is perfect for festive occasions and can be paired with churidar or palazzo pants for a complete look.',
-        sizesAvailable: ['S', 'M', 'L'] 
+        thumbnails : [kurti2,kurti2Thumbnail],
+        sizesAvailable: ['S', 'M', 'L'] ,
+        subcategory:'anarkali kurtis',
       },
       { 
         id: 5, 
@@ -135,19 +154,25 @@ import photoframe from '../assets/images/photoframe.webp'
         rating: 4.8, 
         reviews: 270, 
         image: saree5,
+        thumbnails : [saree5,saree5Thumbnail],
         details: 'Traditional Banarasi silk saree with rich zari work and a luxurious feel. This saree is a timeless piece, ideal for weddings and other grand events, showcasing the beauty of Indian craftsmanship.',
-        sizesAvailable: ['Free Size'] 
+        sizesAvailable: ['Free Size'] ,
+        subcategory:'sarees',
+    
       },
       { 
         id: 6, 
-        name: 'Casual Cotton Kurti', 
+        name: 'Organza Party Wear Saree', 
         category: 'Women Ethnic', 
         price: 499, 
         rating: 4.2, 
         reviews: 150, 
         image: saree4,
+        thumbnails : [saree4,saree4Thumbnail],
         details: 'A casual cotton kurti that’s easy to wear and maintain. With its simple yet elegant design, this kurti is perfect for everyday wear, offering comfort without compromising on style.',
-        sizesAvailable: ['S', 'M', 'L'] 
+        sizesAvailable: ['S', 'M', 'L'] ,
+        subcategory:'sarees',
+       
       },
       { 
         id: 7, 
@@ -158,7 +183,9 @@ import photoframe from '../assets/images/photoframe.webp'
         reviews: 280, 
         image: saree3,
         details: 'Chic georgette saree with a modern print, ideal for casual outings and parties. This saree is lightweight and easy to carry, offering both style and comfort in one package.',
-        sizesAvailable: ['Free Size'] 
+        sizesAvailable: ['Free Size'] ,
+        subcategory:'silk sarees',
+        
       },
       { 
         id: 8, 
@@ -169,7 +196,8 @@ import photoframe from '../assets/images/photoframe.webp'
         reviews: 230, 
         image: kurti3,
         details: 'Flowing Anarkali kurti with intricate embroidery and a flattering silhouette. Perfect for festive occasions, this kurti offers a regal look that enhances your traditional attire.',
-        sizesAvailable: ['S', 'M', 'L'] 
+        sizesAvailable: ['S', 'M', 'L'] ,
+        subcategory:'anarkali kurtis',
       },
       { 
         id: 9, 
@@ -180,7 +208,9 @@ import photoframe from '../assets/images/photoframe.webp'
         reviews: 290, 
         image: saree6,
         details: 'Designer Chanderi saree with a blend of contemporary and traditional designs. This saree is light and comfortable, making it suitable for both day and evening events.',
-        sizesAvailable: ['Free Size'] 
+        sizesAvailable: ['Free Size'] ,
+        subcategory:'silk sarees',
+     
       },
       { 
         id: 10, 
@@ -191,7 +221,8 @@ import photoframe from '../assets/images/photoframe.webp'
         reviews: 210, 
         image: kurti4,
         details: 'Stylish party wear kurti with sequins and embroidery, ideal for festive celebrations. The kurti offers a perfect blend of elegance and glamor, making it a great choice for special occasions.',
-        sizesAvailable: ['S', 'M', 'L'] 
+        sizesAvailable: ['S', 'M', 'L'] ,
+        subcategory:'anarkali kurtis',
       },
       { 
         id: 11, 

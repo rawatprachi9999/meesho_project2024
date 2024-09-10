@@ -18,9 +18,9 @@ function SignUpForm({ setUser }) {
         password,
         cart: [] // Initialize an empty cart for the new user
       };
-      localStorage.setItem('user', JSON.stringify(newUser));
-      setUser(newUser); 
-      navigate('/'); 
+      localStorage.setItem('user', JSON.stringify(newUser)); // Store user in localStorage
+      setUser(newUser); // Update the user state in the parent component
+      navigate('/'); // Redirect to the home page after successful signup
     }
   };
 
@@ -30,8 +30,9 @@ function SignUpForm({ setUser }) {
       <form onSubmit={handleSignUp} className="signup-form">
         <h2>Sign Up</h2>
         <div className="input-group">
-          <label>Name</label>
+          <label htmlFor="name">Name</label>
           <input 
+            id="name"
             type="text" 
             placeholder="Enter your name" 
             value={name} 
@@ -40,8 +41,9 @@ function SignUpForm({ setUser }) {
           />
         </div>
         <div className="input-group">
-          <label>Email</label>
+          <label htmlFor="email">Email</label>
           <input 
+            id="email"
             type="email" 
             placeholder="youremail@gmail.com" 
             value={email} 
@@ -49,9 +51,10 @@ function SignUpForm({ setUser }) {
             required 
           />
         </div>
-        <div class="input-group">
-          <label>Password</label>
+        <div className="input-group">
+          <label htmlFor="password">Password</label>
           <input 
+            id="password"
             type="password" 
             placeholder="Enter your password" 
             value={password} 
@@ -64,5 +67,6 @@ function SignUpForm({ setUser }) {
     </>
   );
 }
+
 
 export default SignUpForm;

@@ -1,59 +1,90 @@
-/* BuyNowPage.css */
+.buy-now-page {
+  padding: 20px;
+}
+
+.buy-now-header h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
 .buy-now-container {
-    width: 80%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1 {
-    text-align: center;
-    color: #333;
-  }
-  
-  .order-details, .payment-info {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  h2 {
-    margin-bottom: 10px;
-    color: #555;
-  }
-  
-  p {
-    margin: 5px 0;
-    color: #666;
-  }
-  
-  h3 {
-    margin-top: 10px;
-    font-weight: bold;
-    color: #000;
-  }
-  
-  .place-order-btn {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    margin-top: 20px;
-    background-color: #9e28b4;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .place-order-btn:hover {
-    background-color: #7a1e8c;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+}
+
+.buy-now-items {
+  flex: 2;
+}
+
+.buy-now-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.buy-now-item-details {
+  display: flex;
+}
+
+.buy-now-item-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+}
+
+.reduce-btn,
+.add-btn {
+  border: none;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.quantity {
+  font-size: 16px;
+  margin: 0 10px;
+}
+
+.buy-now-summary {
+  flex: 1;
+}
+
+.price-details p {
+  margin: 10px 0;
+}
+
+.discount-info {
+  color: green;
+}
+
+.continue-btn {
+  background-color: #9e28b4;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.meesho-safe {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.meesho-safe img {
+  width: 100px;
+}

@@ -15,24 +15,39 @@ const cartSlice = createSlice({
       const existingItem = state.cartItems.find(cartItem => cartItem.id === item.id);
 
       if (existingItem) {
-        // If item is already in the cart, increase its quantity and update total price
         existingItem.quantity += 1;
         existingItem.totalPrice += item.price;
       } else {
-        // If item is new to the cart, add it
         state.cartItems.push({
           ...item,
-          quantity: 1,         // Initial quantity set to 1
-          totalPrice: item.price, // Initial total price is the price of the item
+          quantity: 1,
+          totalPrice: item.price,
         });
       }
 
-      // Update global cart state
-      state.totalQuantity += 1; // Increment total quantity of items in cart
-      state.totalAmount += item.price; // Increment total amount based on item price
+      state.totalQuantity += 1;
+      state.totalAmount += item.price;
     },
-    
-    // Additional reducers can go here, for example:
+
+    reduceQuantity: (state, action) => {
+      const id = action.payload;
+      const existingItem = state.cartItems.find(cartItem => cartItem.id === id);
+
+      if (existingItem) {
+        if (existingItem.quantity > 1) {
+          existingItem.quantity -= 1;
+          existingItem.totalPrice -= existingItem.price;
+          state.totalQuantity -= 1;
+          state.totalAmount -= existingItem.price;
+        } else {
+          // If quantity is 1, remove item from cart
+          state.totalQuantity -= 1;
+          state.totalAmount -= existingItem.totalPrice;
+          state.cartItems = state.cartItems.filter(cartItem => cartItem.id !== id);
+        }
+      }
+    },
+
     removeFromCart: (state, action) => {
       const id = action.payload;
       const existingItem = state.cartItems.find(cartItem => cartItem.id === id);
@@ -52,6 +67,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const { addToCart, reduceQuantity, removeFromCart, clearCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

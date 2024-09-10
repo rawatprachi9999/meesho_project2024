@@ -5,6 +5,7 @@ import ProductGrid from './ProductGrid';
 import products from '../Components/products'; // Adjust the path as needed
 import '../styles/ProductPage.css';
 import { addToCart } from '../redux/cartSlice';
+
 function ProductPage() {
   const [filters, setFilters] = useState({
     categories: [],
@@ -16,7 +17,7 @@ function ProductPage() {
   const dispatch = useDispatch();
 
   const applyFilters = () => {
-    let filteredProducts = products;
+    let filteredProducts = products || []; // Ensure products is an array
 
     // Filter by categories
     if (filters.categories.length > 0) {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import Header from './Header';
 
 function Profile({ user, handleDeleteAccount }) {
   const navigate = useNavigate();
@@ -14,6 +15,8 @@ function Profile({ user, handleDeleteAccount }) {
   };
 
   return (
+    <>
+    <Header/>
     <div className="profile-dropdown">
       {user ? (
         <>
@@ -29,7 +32,9 @@ function Profile({ user, handleDeleteAccount }) {
         </>
       )}
     </div>
+    </>
   );
 }
+
 
 export default Profile;
