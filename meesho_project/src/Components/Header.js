@@ -1,14 +1,16 @@
 import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'; // If you want to show cart count
 import '../styles/Header.css';
 import phoneIcon from '../assets/images/phone.png';
 import profileIcon from '../assets/images/profile.jpg';
 import cartIcon from '../assets/images/cart.png';
 import brand from '../assets/images/brand.jpg';
 import Profile from './Profile';
+import ProductGrid from './ProductGrid'; // Import ProductGrid to render the filtered products
+import products from './products';
 
-const Header = ({ products, setFilteredProducts }) => {
+const Header = () => {
   const [user, setUser] = useState(null);
   const [accountDropdown, setAccountDropdown] = useState(false);
   const [searchInput, setSearchInput] = useState('');
@@ -17,7 +19,8 @@ const Header = ({ products, setFilteredProducts }) => {
   const [downloadDropdown, setDownloadDropdown] = useState(false);
   const searchBarRef = useRef(null);
   const navigate = useNavigate();
-
+  
+  // To get cart count
   const cartItems = useSelector((state) => state.cart.cartItems);
 
   const handleAccountHover = () => {
@@ -25,7 +28,7 @@ const Header = ({ products, setFilteredProducts }) => {
   };
 
   const handleAccountLeave = () => {
-    setTimeout(() => setAccountDropdown(false), 300); // Delay hiding dropdown
+    setAccountDropdown(false);
   };
 
   const handleDownloadHover = () => {
@@ -33,34 +36,18 @@ const Header = ({ products, setFilteredProducts }) => {
   };
 
   const handleDownloadLeave = () => {
-    setTimeout(() => setDownloadDropdown(false), 300); // Delay hiding dropdown
+    setDownloadDropdown(false);
   };
 
-  const handleSearchChange = (event) => {
-    setSearchInput(event.target.value);
+  const handleSearchChange = (e) => {
+    setSearchInput(e.target.value);
   };
 
   const handleSearchSubmit = () => {
     if (searchInput.trim()) {
-      const filtered = products.filter(
-        (product) =>
-          product.category.toLowerCase().includes(searchInput.toLowerCase()) ||
-          product.subcategory.toLowerCase().includes(searchInput.toLowerCase())
-      );
-      setFilteredProducts(filtered);
       setRecentSearches((prevSearches) => [searchInput, ...prevSearches.slice(0, 4)]);
       setSearchInput('');
     }
-  };
-
-  const handleDropdownClick = (searchTerm) => {
-    const filtered = products.filter(
-      (product) =>
-        product.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.subcategory.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredProducts(filtered);
-    setSearchInput(searchTerm); // Set search input to the clicked term
   };
 
   const handleSearchFocus = () => {
@@ -82,9 +69,15 @@ const Header = ({ products, setFilteredProducts }) => {
     setUser(null);
   };
 
+  // Navigate to Cart Page
   const handleCartClick = () => {
     navigate('/cart');
   };
+
+  // Filter products based on search input
+  const filteredProducts = products.filter(product =>
+    product.name.toLowerCase().includes(searchInput.toLowerCase())
+  );
 
   return (
     <header className="header">
@@ -112,9 +105,7 @@ const Header = ({ products, setFilteredProducts }) => {
                 <ul>
                   {recentSearches.length > 0 ? (
                     recentSearches.map((search, index) => (
-                      <li key={index} onClick={() => handleDropdownClick(search)}>
-                        {search}
-                      </li>
+                      <li key={index}>{search}</li>
                     ))
                   ) : (
                     <li>No recent searches</li>
@@ -124,19 +115,15 @@ const Header = ({ products, setFilteredProducts }) => {
               <div className="search-option popular-searches">
                 <strong>Popular Searches</strong>
                 <ul>
-                  <li onClick={() => handleDropdownClick('Saree')}>Saree</li>
-                  <li onClick={() => handleDropdownClick('Kurti')}>Kurti</li>
-                  <li onClick={() => handleDropdownClick('Watch')}>Watch</li>
-                  <li onClick={() => handleDropdownClick('Earring')}>Earring</li>
-                  <li onClick={() => handleDropdownClick('Top for Women')}>
-                    Top for Women
-                  </li>
-                  <li onClick={() => handleDropdownClick('Blouse')}>Blouse</li>
-                  <li onClick={() => handleDropdownClick('Short Kurti')}>
-                    Short Kurti
-                  </li>
-                  <li onClick={() => handleDropdownClick('Jeans')}>Jeans</li>
-                  <li onClick={() => handleDropdownClick('Shoes')}>Shoes</li>
+                  <li>Saree</li>
+                  <li>Kurti</li>
+                  <li>Watch</li>
+                  <li>Earring</li>
+                  <li>Top for Women</li>
+                  <li>Blouse</li>
+                  <li>Short Kurti</li>
+                  <li>Jeans</li>
+                  <li>Shoes</li>
                 </ul>
               </div>
             </div>
@@ -154,53 +141,25 @@ const Header = ({ products, setFilteredProducts }) => {
             {downloadDropdown && (
               <div className="download-dropdown">
                 <p>
-                  <a
-                    href="https://play.google.com/store/apps/details?id=com.meesho.supply"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      src="https://images.meesho.com/images/pow/playstore-icon-big.png"
-                      alt="Google Play Store"
-                    />
+                  <a href="https://play.google.com/store/apps/details?id=com.meesho.supply" target='_blank' rel="noopener noreferrer">
+                    <img src='https://images.meesho.com/images/pow/playstore-icon-big.png' alt="Google Play Store" />
                   </a>
                 </p>
                 <p>
-                  <a
-                    href="https://apps.apple.com/in/app/meesho/id1457958492"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      src="https://images.meesho.com/images/pow/appstore-icon-big.png"
-                      alt="Apple App Store"
-                    />
+                  <a href="https://apps.apple.com/in/app/meesho/id1457958492" target='_blank' rel="noopener noreferrer">
+                    <img src='https://images.meesho.com/images/pow/appstore-icon-big.png' alt="Apple App Store" />
                   </a>
-                </p>
+                </p>    
               </div>
             )}
           </div>
 
           <div className="become-supplier">
-            <Link
-              to="https://supplier.meesho.com/?utm_source=meesho&utm_medium=website&utm_campaign=header"
-              className="become-supplier"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Become a Supplier
-            </Link>
+            <Link to="https://supplier.meesho.com/?utm_source=meesho&utm_medium=website&utm_campaign=header" className="become-supplier" target='_blank' rel="noopener noreferrer">Become a Supplier</Link>
           </div>
 
           <div className="newsroom">
-            <Link
-              to="https://www.meesho.io/news"
-              className="newsroom"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Newsroom
-            </Link>
+            <Link to="https://www.meesho.io/news" className="newsroom" target='_blank' rel="noopener noreferrer">Newsroom</Link>
           </div>
 
           <div
@@ -215,13 +174,22 @@ const Header = ({ products, setFilteredProducts }) => {
             )}
           </div>
         </div>
-        <div className="cart" onClick={handleCartClick}>
+        <div className="cart">
+        <Link to="/cart">
           <img src={cartIcon} alt="Cart" className="icon" />
           {cartItems.length > 0 && (
             <span className="cart-count">{cartItems.length}</span>
           )}
-        </div>
+        </Link>
       </div>
+      </div>
+
+      {/* Product Grid for displaying filtered products */}
+      {searchInput && (
+        <div className="product-grid-container">
+          <ProductGrid products={filteredProducts} />
+        </div>
+      )}
     </header>
   );
 };

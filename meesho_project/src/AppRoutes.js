@@ -10,6 +10,7 @@ import Cart from './Components/Cart';
 import products from './Components/products';
 import BuyNowPage from './Components/BuyNowPage';
 import Confirmation from './Components/Confirmation';
+import ProductListingPage from './Components/ProductListingPage';
 
 function AppRoutes() {
   const [user, setUser] = useState(null);
@@ -43,6 +44,7 @@ function AppRoutes() {
       <Route path="/cart" element={<Cart />} />
       <Route path="/buynow" element={<BuyNowPage />} />
       <Route path="/confirmation" element={<Confirmation />} />
+      <Route path="/products" element={<ProductListingPage products={products} />} />
       {/* Catch-all route for undefined paths */}
       <Route path="*" element={<LandingPage />} />
     </Routes>

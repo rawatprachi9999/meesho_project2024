@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ProductGrid from './ProductGrid'; // Import ProductGrid to render the filtered products
+import products from './products'; // Assuming this is the products array
 import '../styles/NavBar.css';
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(null);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
@@ -16,7 +19,12 @@ const Navbar = () => {
   };
 
   const handleDropdownItemClick = (category) => {
-    navigate(`/products/${category}`, { state: { category: activeMenu } });
+    // Filter products based on the selected category
+    const filtered = products.filter(product =>
+      product.category.toLowerCase().includes(category.toLowerCase())
+    );
+    setFilteredProducts(filtered);
+    navigate(`/products/${category}`, { state: { category } });
   };
 
   const handleClickOutside = (event) => {
@@ -33,133 +41,113 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="navbar">
-      <ul className="nav-links">
-        <li onClick={() => handleClick('WomenEthnic')} ref={dropdownRef}>
-          Women Ethnic
-          {activeMenu === 'WomenEthnic' && (
-            <div className="dropdown">
-              <div className="dropdown-section">
-                <h5 onClick={() => handleDropdownItemClick('Sarees')}>Sarees</h5>
-                <p onClick={() => handleDropdownItemClick('Silk Sarees')}>Silk Sarees</p>
+    <>
+      <nav className="navbar">
+        <ul className="nav-links">
+          <li onClick={() => handleClick('WomenEthnic')} ref={dropdownRef}>
+            Women Ethnic
+            {activeMenu === 'WomenEthnic' && (
+              <div className="dropdown">
+                <div className="dropdown-section">
+                  <h5 onClick={() => handleDropdownItemClick('Sarees')}>Sarees</h5>
+                </div>
+                <div className="dropdown-section">
+                  <h5 onClick={() => handleDropdownItemClick('Kurtis')}>Kurtis</h5>
+                </div>
               </div>
-              <div className="dropdown-section">
-                <h5 onClick={() => handleDropdownItemClick('Kurtis')}>Kurtis</h5>
-                <p onClick={() => handleDropdownItemClick('Anarkali Kurtis')}>Anarkali Kurtis</p>
-              </div>
-            </div>
-          )}
-        </li>
+            )}
+          </li>
 
-        <li onClick={() => handleClick('WomenWestern')} ref={dropdownRef}>
-          Women Western
-          {activeMenu === 'WomenWestern' && (
-            <div className="dropdown">
-              <div className="dropdown-section">
-                <h5 onClick={() => handleDropdownItemClick('Topwear')}>Topwear</h5>
-                <p onClick={() => handleDropdownItemClick('Tops')}>Tops</p>
-                <p onClick={() => handleDropdownItemClick('Dresses')}>Dresses</p>
+          <li onClick={() => handleClick('WomenWestern')} ref={dropdownRef}>
+            Women Western
+            {activeMenu === 'WomenWestern' && (
+              <div className="dropdown">
+                <div className="dropdown-section">
+                  <h5 onClick={() => handleDropdownItemClick('Top')}>Topwear</h5>
+                </div>
+                <div className="dropdown-section">
+                  <h5 onClick={() => handleDropdownItemClick('Jeans')}>Bottomwear</h5>
+                </div>
               </div>
-              <div className="dropdown-section">
-                <h5 onClick={() => handleDropdownItemClick('Bottomwear')}>Bottomwear</h5>
-                <p onClick={() => handleDropdownItemClick('Jeans')}>Jeans</p>
-                <p onClick={() => handleDropdownItemClick('Skirts')}>Skirts</p>
-              </div>
-            </div>
-          )}
-        </li>
+            )}
+          </li>
 
-        <li onClick={() => handleClick('Men')} ref={dropdownRef}>
-          Men
-          {activeMenu === 'Men' && (
-            <div className="dropdown">
-              <div className="dropdown-section">
-                <h5 onClick={() => handleDropdownItemClick('TopWear')}>Top Wear</h5>
-                <p onClick={() => handleDropdownItemClick('Tshirts')}>Tshirts</p>
-                <p onClick={() => handleDropdownItemClick('Shirts')}>Shirts</p>
+          <li onClick={() => handleClick('Men')} ref={dropdownRef}>
+            Men
+            {activeMenu === 'Men' && (
+              <div className="dropdown">
+                <div className="dropdown-section">
+                  <h5 onClick={() => handleDropdownItemClick('Tshirts')}>Top Wear</h5>
+                  <h5 onClick={() => handleDropdownItemClick('Shirts')}>Shirts</h5>
+                </div>
+                <div className="dropdown-section">
+                  <h5 onClick={() => handleDropdownItemClick('Jeans')}>Bottom Wear</h5>
+                </div>
               </div>
-              <div className="dropdown-section">
-                <h5 onClick={() => handleDropdownItemClick('BottomWear')}>Bottom Wear</h5>
-                <p onClick={() => handleDropdownItemClick('Jeans')}>Jeans</p>
-                <p onClick={() => handleDropdownItemClick('Trousers')}>Trousers</p>
-              </div>
-            </div>
-          )}
-        </li>
+            )}
+          </li>
 
-        <li onClick={() => handleClick('HomeKitchen')} ref={dropdownRef}>
-          Home & Kitchen
-          {activeMenu === 'HomeKitchen' && (
-            <div className="dropdown">
-              <div className="dropdown-section">
-                <h5 onClick={() => handleDropdownItemClick('HomeFurnishing')}>Home Furnishing</h5>
-                <p onClick={() => handleDropdownItemClick('Bedsheets')}>Bedsheets</p>
-                <p onClick={() => handleDropdownItemClick('Curtains')}>Curtains</p>
+          <li onClick={() => handleClick('HomeKitchen')} ref={dropdownRef}>
+            Home & Kitchen
+            {activeMenu === 'HomeKitchen' && (
+              <div className="dropdown">
+                <div className="dropdown-section">
+                  <h5 onClick={() => handleDropdownItemClick('Bedsheets')}>Home Furnishing</h5>
+                </div>
+                <div className="dropdown-section">
+                  <h5 onClick={() => handleDropdownItemClick('Wall Clock')}>Home Decor</h5>
+                </div>
               </div>
-              <div className="dropdown-section">
-                <h5 onClick={() => handleDropdownItemClick('HomeDecor')}>Home Decor</h5>
-                <p onClick={() => handleDropdownItemClick('Stickers')}>Stickers</p>
-                <p onClick={() => handleDropdownItemClick('Showpieces')}>Showpieces</p>
-              </div>
-            </div>
-          )}
-        </li>
+            )}
+          </li>
 
-        <li onClick={() => handleClick('Kids')} ref={dropdownRef}>
-          Kids
-          {activeMenu === 'Kids' && (
-            <div className="dropdown">
-              <div className="dropdown-section">
-                <h5 onClick={() => handleDropdownItemClick('BoysGirls')}>Boys & Girls</h5>
-                <p onClick={() => handleDropdownItemClick('Dresses')}>Dresses</p>
-                <p onClick={() => handleDropdownItemClick('Shoes')}>Shoes</p>
+          <li onClick={() => handleClick('Kids')} ref={dropdownRef}>
+            Kids
+            {activeMenu === 'Kids' && (
+              <div className="dropdown">
+                <div className="dropdown-section">
+                  <h5 onClick={() => handleDropdownItemClick('Girls')}>Boys & Girls</h5>
+                  <h5 onClick={() => handleDropdownItemClick('Dress')}>Dresses</h5>
+                </div>
               </div>
-              <div className="dropdown-section">
-                <h5 onClick={() => handleDropdownItemClick('Toys')}>Toys & Accessories</h5>
-                <p onClick={() => handleDropdownItemClick('SoftToys')}>Soft Toys</p>
-                <p onClick={() => handleDropdownItemClick('Watches')}>Watches</p>
-              </div>
-            </div>
-          )}
-        </li>
+            )}
+          </li>
 
-        <li onClick={() => handleClick('BeautyHealth')} ref={dropdownRef}>
-          Beauty & Health
-          {activeMenu === 'BeautyHealth' && (
-            <div className="dropdown">
-              <div className="dropdown-section">
-                <h5 onClick={() => handleDropdownItemClick('Makeup')}>Makeup</h5>
-                <p onClick={() => handleDropdownItemClick('Face')}>Face</p>
-                <p onClick={() => handleDropdownItemClick('Eyes')}>Eyes</p>
+          <li onClick={() => handleClick('BeautyHealth')} ref={dropdownRef}>
+            Beauty & Health
+            {activeMenu === 'BeautyHealth' && (
+              <div className="dropdown">
+                <div className="dropdown-section">
+                  <h5 onClick={() => handleDropdownItemClick('Lipstick')}>Makeup</h5>
+                  <h5 onClick={() => handleDropdownItemClick('Face')}>Face</h5>
+                </div>
               </div>
-              <div className="dropdown-section">
-                <h5 onClick={() => handleDropdownItemClick('Wellness')}>Wellness</h5>
-                <p onClick={() => handleDropdownItemClick('Sanitizers')}>Sanitizers</p>
-                <p onClick={() => handleDropdownItemClick('OralCare')}>Oral Care</p>
-              </div>
-            </div>
-          )}
-        </li>
+            )}
+          </li>
 
-        <li onClick={() => handleClick('JewelleryAccessories')} ref={dropdownRef}>
-          Jewellery & Accessories
-          {activeMenu === 'JewelleryAccessories' && (
-            <div className="dropdown">
-              <div className="dropdown-section">
-                <h5 onClick={() => handleDropdownItemClick('JewellerySet')}>Jewellery</h5>
-                <p onClick={() => handleDropdownItemClick('Earrings')}>Earrings</p>
-                <p onClick={() => handleDropdownItemClick('Studs')}>Studs</p>
+          <li onClick={() => handleClick('JewelleryAccessories')} ref={dropdownRef}>
+            Jewellery & Accessories
+            {activeMenu === 'JewelleryAccessories' && (
+              <div className="dropdown">
+                <div className="dropdown-section">
+                  <h5 onClick={() => handleDropdownItemClick('Earrings')}>Jewellery</h5>
+                </div>
+                <div className="dropdown-section">
+                  <h5 onClick={() => handleDropdownItemClick('Anklet')}>Accessories</h5>
+                </div>
               </div>
-              <div className="dropdown-section">
-                <h5 onClick={() => handleDropdownItemClick('Accessories')}>Accessories</h5>
-                <p onClick={() => handleDropdownItemClick('Belts')}>Belts</p>
-                <p onClick={() => handleDropdownItemClick('Watches')}>Watches</p>
-              </div>
-            </div>
-          )}
-        </li>
-      </ul>
-    </nav>
+            )}
+          </li>
+        </ul>
+      </nav>
+
+      {/* Render the Product Grid for displaying filtered products */}
+      {filteredProducts.length > 0 && (
+        <div className="product-grid-container">
+          <ProductGrid products={filteredProducts} />
+        </div>
+      )}
+    </>
   );
 };
 

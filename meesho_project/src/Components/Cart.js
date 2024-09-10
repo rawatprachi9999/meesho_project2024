@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Cart.css'; // Add appropriate styles
 import Header from './Header';
 import safty from '../assets/images/safty.webp';
@@ -8,10 +8,15 @@ import { addToCart, reduceQuantity } from '../redux/cartSlice'; // Using your up
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Initialize the navigate function
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+
+  // Calculate discount and final amount
+  const discount = totalAmount > 500 ? 71 : 0;
+  const discountedAmount = totalAmount - discount;
 
   const handleAddItem = (item) => {
     dispatch(addToCart(item)); // Dispatch action to increase the quantity
@@ -19,6 +24,14 @@ const Cart = () => {
 
   const handleReduceItem = (id) => {
     dispatch(reduceQuantity(id)); // Dispatch action to reduce the quantity
+  };
+
+  const handleBuyNow = () => {
+    if (totalAmount === 0) {
+      alert('Add something to proceed.');
+    } else {
+      navigate('/buynow'); // Navigate to Buy Now page
+    }
   };
 
   return (
@@ -59,7 +72,7 @@ const Cart = () => {
                         className="add-btn" 
                         onClick={() => handleAddItem(item)}
                       >
-                        &#43; {/* Unicode for plus symbol */}
+                        &#43;{/* Unicode for plus symbol */}
                       </button>
                     </div>
                   </div>
@@ -76,15 +89,21 @@ const Cart = () => {
           <h3>Price Details ({totalQuantity} Items)</h3>
           <div className="price-details">
             <p>Total Product Price: <span>₹{totalAmount}</span></p>
-            <p>Total Discounts: <span className="discount-text">- ₹71</span></p>
-            <p>Order Total: <span>₹{totalAmount - 71}</span></p>
+            {discount > 0 && (
+              <p>Total Discounts: <span className="discount-text">- ₹{discount}</span></p>
+            )}
+            <p>Order Total: <span>₹{discountedAmount}</span></p>
           </div>
           <div className="continue-section">
-            <p className="discount-info">Yay! Your total discount is ₹71</p>
-           
-            <Link to="/buynow">
-              <button className="continue-btn">Buy Now</button>
-            </Link>
+            {discount > 0 && (
+              <p className="discount-info">Yay! Your total discount is ₹{discount}</p>
+            )}
+            <button 
+              className="continue-btn" 
+              onClick={handleBuyNow}
+            >
+              Buy Now
+            </button>
           </div>
           <div className="meesho-safe">
             <img src={safty} alt="Meesho Safe" />

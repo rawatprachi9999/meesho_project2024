@@ -1,90 +1,81 @@
-.buy-now-page {
-  padding: 20px;
-}
-
-.buy-now-header h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
+/* BuyNowPage.css */
 
 .buy-now-container {
-  display: flex;
-  justify-content: space-between;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  margin: 40px ;
 }
 
-.buy-now-items {
-  flex: 2;
-}
-
-.buy-now-item {
-  display: flex;
-  justify-content: space-between;
+h1 {
+  text-align: center;
   margin-bottom: 20px;
-}
-
-.buy-now-item-details {
-  display: flex;
-}
-
-.buy-now-item-image {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  margin-right: 20px;
-}
-
-.quantity-controls {
-  display: flex;
-  align-items: center;
-}
-
-.reduce-btn,
-.add-btn {
-  border: none;
-  background-color: #f0f0f0;
-  color: #333;
   font-size: 24px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin: 0 5px;
 }
 
-.quantity {
-  font-size: 16px;
-  margin: 0 10px;
+.order-details, .payment-info {
+  margin-bottom: 30px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
 }
 
-.buy-now-summary {
-  flex: 1;
+.order-details h2, .payment-info h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
 }
 
-.price-details p {
-  margin: 10px 0;
+.order-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
 }
 
-.discount-info {
-  color: green;
+.order-item:last-child {
+  border-bottom: none;
 }
 
-.continue-btn {
-  background-color: #9e28b4;
+.discount-text {
+  color: red;
+  text-decoration: line-through;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.place-order-btn {
+  display: block;
+  width: 100%;
+  background-color: #a349a4; /* Change as needed */
   color: white;
-  padding: 10px 20px;
+  padding: 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
-
-.meesho-safe {
-  margin-top: 20px;
+  font-size: 18px;
   text-align: center;
 }
 
-.meesho-safe img {
-  width: 100px;
+.place-order-btn:hover {
+  background-color: #933b77; /* Darker shade for hover effect */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .buy-now-container {
+    padding: 10px;
+  }
+
+  .order-details, .payment-info {
+    padding: 15px;
+  }
+
+  .place-order-btn {
+    font-size: 16px;
+    padding: 12px;
+  }
 }
