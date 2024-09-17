@@ -1,0 +1,166 @@
+/* Navbar styles */
+.navbar {
+  font-family: 'Mier Bold';
+  font-display: swap;
+  background-color: #ffffff;
+  border-bottom: 1px solid #bdaaaa;
+  padding: 0px 0px;
+  position: relative;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  font-size: 18px; /* Fixed typo: "18 px" to "18px" */
+}
+
+/* Navigation links styles */
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-links > li {
+  position: relative;
+  padding: 10px 10px;
+  cursor: pointer;
+  font-weight: 500;
+  margin: 10px 10px;
+  transition: color 0.5s, border-bottom 0.6s; /* Ensure transition is applied */
+}
+
+.nav-links > li:first-child {
+  padding-left: 10px; /* Adjust as needed */
+}
+
+.nav-links > li:last-child {
+  padding-right: 10px; /* Adjust as needed */
+}
+
+.nav-links > li:hover .dropdown {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition for dropdown */
+}
+
+.nav-links a:first-child {
+  margin-left: -5px;
+}
+
+/* Dropdown styles */
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1001;
+  background-color: white; /* White background for the box */
+  color: #fff; /* White text color */
+  border-radius: 4px; /* Rounded corners */
+  padding: 5px; /* Reduced padding */
+  display: none;
+  width: 200px; /* Reduced width */
+  height: 200px; /* Reduced width */
+  box-shadow: 0 4px 8px rgba(200, 192, 192, 0.2); /* Shadow for the dropdown */
+  transition: all 0.3s ease;
+}
+.dropdown-section {
+  flex: 1;
+  padding: 0 10px;
+  min-width: 120px;
+}
+
+.dropdown-section h5 {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #8e089c;
+}
+
+.dropdown-section p:hover {
+  margin: 0;
+  padding-left: 5px;
+  color: #666; 
+}
+
+.nav-links > li.active {
+  border-bottom: 5px solid #8b3f94;
+  color: #8b3f94;
+}
+
+.nav-links > li::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: transparent; /* No background color */
+  z-index: 0; /* Place it behind the text */
+}
+
+.nav-links > li:hover::after {
+  background: rgba(0, 0, 0, 0.1); /* Optional: Add a slight background on hover */
+}
+
+.dropdown-section p {
+  margin-bottom: 5px;
+}
+
+.dropdown-item h5 {
+  margin-bottom: 0; 
+  padding-bottom: 5px;
+}
+
+.dropdown-item ul {
+  padding-left: 0;
+  margin-bottom: 0; 
+}
+
+.dropdown-item li {
+  margin-bottom: 5px; 
+  padding: 0; 
+}
+
+.dropdown-item {
+  margin-right: 15px; 
+}
+
+@media (max-width: 768px) {
+  /* Adjust font size for smaller screens */
+  .nav-links > li {
+    font-size: 14px; /* Reduced font size for smaller screens */
+    padding: 8px 8px; /* Adjust padding to keep the layout consistent */
+  }
+
+  .dropdown-section h5 {
+    font-size: 14px; /* Adjust heading size in the dropdown */
+  }
+
+  .dropdown-section p {
+    font-size: 12px; /* Adjust paragraph size in the dropdown */
+  }
+
+  .nav-links > li.active {
+    border-bottom: 3px solid #8b3f94; /* Adjust thickness for smaller screens */
+  }
+
+  .dropdown {
+    width: 160px; /* Reduce dropdown width for smaller screens */
+    height: auto; /* Adjust height to auto */
+  }
+
+  .dropdown-item h5 {
+    font-size: 13px; /* Smaller heading in dropdown for better fit */
+  }
+
+  .dropdown-item li {
+    font-size: 12px; /* Smaller list item text */
+  }
+
+  .dropdown-item {
+    margin-right: 10px; /* Adjust margin for better spacing */
+  }
+}
