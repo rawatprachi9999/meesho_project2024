@@ -1,90 +1,265 @@
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
-import validator from "validator";
-import userModel from "../models/userModel.js";
+// import validator from "validator";
+// import bcrypt from "bcrypt"
+// import jwt from 'jsonwebtoken'
+// import userModel from "../models/userModel.js";
 
-// Create token with expiration
+
+// const createToken = (id) => {
+//     return jwt.sign({ id }, process.env.JWT_SECRET)
+// }
+
+// // Route for user login
+// const loginUser = async (req, res) => {
+//     try {
+
+//         const { email, password } = req.body;
+
+//         const user = await userModel.findOne({ email });
+
+//         if (!user) {
+//             return res.json({ success: false, message: "User doesn't exists" })
+//         }
+
+//         const isMatch = await bcrypt.compare(password, user.password);
+
+//         if (isMatch) {
+
+//             const token = createToken(user._id)
+//             res.json({ success: true, token })
+
+//         }
+//         else {
+//             res.json({ success: false, message: 'Invalid credentials' })
+//         }
+
+//     } catch (error) {
+//         console.log(error);
+//         res.json({ success: false, message: error.message })
+//     }
+// }
+
+// // Route for user register
+// const registerUser = async (req, res) => {
+//     try {
+
+//         const { name, email, password } = req.body;
+
+//         // checking user already exists or not
+//         const exists = await userModel.findOne({ email });
+//         if (exists) {
+//             return res.json({ success: false, message: "User already exists" })
+//         }
+
+//         // validating email format & strong password
+//         if (!validator.isEmail(email)) {
+//             return res.json({ success: false, message: "Please enter a valid email" })
+//         }
+//         if (password.length < 8) {
+//             return res.json({ success: false, message: "Please enter a strong password" })
+//         }
+
+//         // hashing user password
+//         const salt = await bcrypt.genSalt(10)
+//         const hashedPassword = await bcrypt.hash(password, salt)
+
+//         const newUser = new userModel({
+//             name,
+//             email,
+//             password: hashedPassword
+//         })
+
+//         const user = await newUser.save()
+
+//         const token = createToken(user._id)
+
+//         res.json({ success: true, token })
+
+//     } catch (error) {
+//         console.log(error);
+//         res.json({ success: false, message: error.message })
+//     }
+// }
+
+// // Route for admin login
+// const adminLogin = async (req, res) => {
+//     try {
+        
+//         const {email,password} = req.body
+
+//         if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+//             const token = jwt.sign(email+password,process.env.JWT_SECRET);
+//             res.json({success:true,token})
+//         } else {
+//             res.json({success:false,message:"Invalid credentials"})
+//         }
+
+//     } catch (error) {
+//         console.log(error);
+//         res.json({ success: false, message: error.message })
+//     }
+// }
+
+
+// export { loginUser, registerUser, adminLogin }
+
+import validator from "validator";
+import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken';
+import userModel from "../models/userModel.js";
+import nodemailer from 'nodemailer';
+
 const createToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '1d' }); // Token expires in 1 day
+    return jwt.sign({ id }, process.env.JWT_SECRET);
 };
 
-// Login user
+// Route for user login
 const loginUser = async (req, res) => {
-    const { email, password } = req.body;
-
     try {
+        const { email, password } = req.body;
         const user = await userModel.findOne({ email });
 
         if (!user) {
-            return res.status(400).json({ success: false, message: "User does not exist" });
+            return res.json({ success: false, message: "User doesn't exist" });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
-
-        if (!isMatch) {
-            return res.status(400).json({ success: false, message: "Invalid credentials" });
+        if (isMatch) {
+            const token = createToken(user._id);
+            res.json({ success: true, token });
+        } else {
+            res.json({ success: false, message: 'Invalid credentials' });
         }
-
-        const token = createToken(user._id);
-        res.status(200).json({
-            success: true,
-            token,
-            user: { email: user.email, name: user.name }, // Send only necessary info
-        });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: "Server error" });
+        console.log(error);
+        res.json({ success: false, message: error.message });
     }
 };
 
-// Register user
+// Route for user registration
 const registerUser = async (req, res) => {
-    const { name, email, password } = req.body;
-
     try {
-        // Check if user already exists
+        const { name, email, password } = req.body;
+
+        // checking user already exists or not
         const exists = await userModel.findOne({ email });
-
         if (exists) {
-            return res.status(400).json({ success: false, message: "User already exists" });
+            return res.json({ success: false, message: "User already exists" });
         }
 
-        // Validate email format & strong password
+        // validating email format & strong password
         if (!validator.isEmail(email)) {
-            return res.status(400).json({ success: false, message: "Please enter a valid email" });
+            return res.json({ success: false, message: "Please enter a valid email" });
+        }
+        if (password.length < 8) {
+            return res.json({ success: false, message: "Please enter a strong password" });
         }
 
-        if (!validator.isStrongPassword(password)) {
-            return res.status(400).json({
-                success: false,
-                message:
-                    "Password must be at least 8 characters long and include at least one number, one symbol, and both uppercase and lowercase letters",
-            });
-        }
-
-        // Hashing user password
+        // hashing user password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        // Save new user
         const newUser = new userModel({
             name,
             email,
-            password: hashedPassword,
+            password: hashedPassword
         });
 
         const user = await newUser.save();
         const token = createToken(user._id);
-
-        res.status(201).json({
-            success: true,
-            token,
-            user: { email: user.email, name: user.name },
-        });
+        res.json({ success: true, token });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: "Server error" });
+        console.log(error);
+        res.json({ success: false, message: error.message });
     }
 };
 
-export { loginUser, registerUser };
+// Route for sending a password reset email
+const forgotPassword = async (req, res) => {
+    try {
+        const { email } = req.body;
+        const user = await userModel.findOne({ email });
+
+        if (!user) {
+            return res.json({ success: false, message: "User does not exist" });
+        }
+
+        // Generate a reset token
+        const token = createToken(user._id);
+        
+        // Send email
+        const transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: process.env.EMAIL_USER, // Your email
+                pass: process.env.EMAIL_PASS,  // Your email password or app password
+            },
+        });
+
+        const resetLink = `${process.env.FRONTEND_URL}/reset-password/${token}`; // Ensure this URL matches your frontend
+        await transporter.sendMail({
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Password Reset',
+            
+            html: `<p>You requested a password reset. Click the link below to reset your password:</p><a href="${resetLink}">${resetLink}</a>`,
+        });
+
+        res.json({ success: true, message: 'Reset link sent to your email!' });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+};
+
+
+
+// Controller for resetting password
+const resetPassword = async (req, res) => {
+    try {
+        const { token, newPassword } = req.body;
+
+        // Verify the token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        // Find the user by the decoded token ID
+        const user = await userModel.findById(decoded.id);
+
+        if (!user) {
+            return res.status(400).json({ success: false, message: 'Invalid token or user does not exist.' });
+        }
+
+        // Hash the new password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+        // Update the user's password in the database
+        user.password = hashedPassword;
+        await user.save();
+
+        res.json({ success: true, message: 'Password updated successfully!' });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ success: false, message: 'Failed to reset password.' });
+    }
+};
+
+// Route for admin login
+const adminLogin = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+            const token = jwt.sign(email + password, process.env.JWT_SECRET);
+            res.json({ success: true, token });
+        } else {
+            res.json({ success: false, message: "Invalid credentials" });
+        }
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+};
+
+export { loginUser, registerUser, forgotPassword, adminLogin , resetPassword };
+    
+
