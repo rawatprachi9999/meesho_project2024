@@ -77,8 +77,9 @@ const Navbar = () => {
       <div className='flex items-center gap-6'>
             <img onClick={()=> { setShowSearch(true); navigate('/collection') }} src={assets.search_icon} className='w-5 cursor-pointer' alt="" />
             
-            <div className='group relative'>
+            <div className='group relative w-full'>
                 <img onClick={()=> token ? null : navigate('/login') } className='w-5 cursor-pointer' src={assets.profile_icon} alt="" />
+                
                 {/* Dropdown Menu */}
                 {token && 
                 <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
