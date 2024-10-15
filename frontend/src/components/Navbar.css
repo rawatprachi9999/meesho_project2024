@@ -1,70 +1,58 @@
 /* Default Styles (for larger screens) */
-.navbar-links {
-    display: flex;
-    align-items: center;
-    gap: 1rem; /* Adjust spacing between items */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100; /* Ensure the navbar stays above other elements */
+  background-color: white; /* Navbar background color */
+  width: 100%;
+  padding: 20px 20px; /* Adjust padding if necessary */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Adds a slight shadow */
+}
+
+body {
+  padding-top: 70px; /* Adjust based on the navbar height to prevent content overlap */
+}
+
+/* Logo Styles */
+.navbar img {
+  max-width: 144px; /* Default logo size */
+  height: auto;
+}
+
+/* Responsive Styles */
+
+/* For tablets (768px and below) */
+@media (max-width: 768px) {
+  .navbar img {
+    max-width: 120px; /* Slightly smaller logo */
+  }
+}
+
+/* For mobile phones (480px and below) */
+@media (max-width: 480px) {
+  .navbar img {
+    max-width: 100px; /* Further reduce logo size for small screens */
   }
   
-  .navbar-links div {
-    display: flex;
-    align-items: center;
-  }
   
-  .navbar-links img {
-    width: 1rem;
-    height: 1rem;
+
+  .navbar .navbar-links {
+    flex-direction: column; /* Stack navbar items vertically */
+    gap: 0.5rem;
   }
-  
+
   .navbar-links p {
-    color: #757575; /* Matches the gray color in the image */
-    font-size: 0.875rem; /* Smaller text size */
+    font-size: 0.75rem; /* Reduce text size */
   }
-  
+
+  .navbar-links img {
+    width: 0.75rem; /* Smaller icons */
+    height: 0.75rem;
+  }
+
   .navbar-divider {
-    height: 1.5rem;
-    border-right: 1px solid #d1d5db; /* Light gray color for the divider */
+    display: none; /* Hide divider on small screens */
   }
-  
-  /* Responsive Styles */
-  
-  /* For tablets (768px and below) */
-  @media (max-width: 768px) {
-    .navbar-links {
-      gap: 0.75rem; /* Reduce the gap between items */
-    }
-    
-    .navbar-links p {
-      font-size: 0.75rem; /* Reduce font size */
-    }
-  
-    .navbar-links img {
-      width: 0.875rem; /* Slightly smaller icons */
-      height: 0.875rem;
-    }
-  
-    .navbar-divider {
-      height: 1rem; /* Reduce divider height */
-    }
-  }
-  
-  /* For mobile phones (480px and below) */
-  @media (max-width: 480px) {
-    .navbar-links {
-      flex-direction: column; /* Stack items vertically */
-      gap: 0.5rem; /* Reduce the gap between items further */
-    }
-    
-    .navbar-links p {
-      font-size: 0.75rem; /* Keep text size smaller */
-    }
-  
-    .navbar-links img {
-      width: 0.75rem; /* Even smaller icons for mobile */
-      height: 0.75rem;
-    }
-  
-    .navbar-divider {
-      display: none; /* Hide the divider on small screens */
-    }
-  }
-  
+}

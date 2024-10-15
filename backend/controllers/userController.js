@@ -1,5 +1,4 @@
 
-
 import validator from "validator";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
@@ -10,7 +9,6 @@ const createToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET);
 };
 
-// Route for user login
 const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -33,18 +31,18 @@ const loginUser = async (req, res) => {
     }
 };
 
-// Route for user registration
+
 const registerUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
-        // checking user already exists or not
+        
         const exists = await userModel.findOne({ email });
         if (exists) {
             return res.json({ success: false, message: "User already exists" });
         }
 
-        // validating email format & strong password
+        
         if (!validator.isEmail(email)) {
             return res.json({ success: false, message: "Please enter a valid email" });
         }
@@ -52,7 +50,7 @@ const registerUser = async (req, res) => {
             return res.json({ success: false, message: "Please enter a strong password" });
         }
 
-        // hashing user password
+       
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -71,7 +69,7 @@ const registerUser = async (req, res) => {
     }
 };
 
-// Route for sending a password reset email
+
 const forgotPassword = async (req, res) => {
     try {
         const { email } = req.body;
@@ -81,24 +79,23 @@ const forgotPassword = async (req, res) => {
             return res.json({ success: false, message: "User does not exist" });
         }
 
-        // Generate a reset token
+     
         const token = createToken(user._id);
         
-        // Send email
+        
         const transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
-                user: process.env.EMAIL_USER, // Your email
-                pass: process.env.EMAIL_PASS,  // Your email password or app password
+                user: process.env.EMAIL_USER, 
+                pass: process.env.EMAIL_PASS,  
             },
         });
 
-        const resetLink = `${process.env.FRONTEND_URL}/reset-password/${token}`; // Ensure this URL matches your frontend
+        const resetLink = `${process.env.FRONTEND_URL}/reset-password/${token}`; 
         await transporter.sendMail({
             from: process.env.EMAIL_USER,
             to: email,
-            subject: 'Password Reset',
-            
+            subject: 'Password Reset',  
             html: `<p>You requested a password reset. Click the link below to reset your password:</p><a href="${resetLink}">${resetLink}</a>`,
         });
 
@@ -110,27 +107,25 @@ const forgotPassword = async (req, res) => {
 };
 
 
-
-// Controller for resetting password
 const resetPassword = async (req, res) => {
     try {
         const { token, newPassword } = req.body;
 
-        // Verify the token
+       
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        // Find the user by the decoded token ID
+       
         const user = await userModel.findById(decoded.id);
 
         if (!user) {
             return res.status(400).json({ success: false, message: 'Invalid token or user does not exist.' });
         }
 
-        // Hash the new password
+      
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(newPassword, salt);
 
-        // Update the user's password in the database
+       
         user.password = hashedPassword;
         await user.save();
 
