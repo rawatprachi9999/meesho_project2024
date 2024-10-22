@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { ShopContext } from '../context/ShopContext';
 import meeshoLogo from '../assets/meeshoLogo.svg';
 import phone from '../assets/phone.png';
-import './navbar.css'
+import './Navbar.css'
 
 const Navbar = () => {
     const [visible, setVisible] = useState(false);
